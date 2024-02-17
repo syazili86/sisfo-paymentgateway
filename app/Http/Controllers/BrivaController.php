@@ -152,7 +152,7 @@ class BrivaController extends Controller implements IController
         ]);
         $this->custCode=$request->paycode;
         $respon=$this->delete();
-        if(!isset($respon['status']) || $respon['status']==false){  
+        if(!isset($respon['status']) || $respon['status']==false){
             if ($respon == null) {
                 $respon = [
                     'status' => false,
@@ -215,13 +215,13 @@ class BrivaController extends Controller implements IController
         if ($this->brivaNo <= 0 || $this->brivaNo == '') {
             return response()->json(
                 ['status'=>'error','metadata'=>[
-                    'status' => false, 
+                    'status' => false,
                     'errDesc' => 'General Error',
                     'responseCode' => '99'
                     ]
                 ],
                 $this->errorStatus
-             ); 
+             );
         }
         $this->namaClient=$request->nama;
         $this->custCode=$request->paycode;
@@ -260,7 +260,7 @@ class BrivaController extends Controller implements IController
         $result = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-
+        dd($result);
         $json = json_decode($result, true);
         $accesstoken = $json['access_token'];
 
@@ -341,7 +341,7 @@ class BrivaController extends Controller implements IController
                     ]
                 ],
                 $this->errorStatus
-             ); 
+             );
         } else if ($result['status']['code'] == "0602") {
             return response()->json(
                 [
@@ -357,7 +357,7 @@ class BrivaController extends Controller implements IController
                 ],
                 $this->errorStatus
             );
-        } 
+        }
         else {
             return $result;
         }
@@ -377,7 +377,7 @@ class BrivaController extends Controller implements IController
         return $this->getReportTime();
     }
 
-    public function create(){        
+    public function create(){
         /**  checkType - Updated at 2021-07-08 */
         $checkType = ToUniversityOrInstitution::where('tuitionMasterId',$this->tid)->first();
         if($checkType['isUniversity'] == null){
