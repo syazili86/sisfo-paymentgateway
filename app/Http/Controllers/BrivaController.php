@@ -260,7 +260,7 @@ class BrivaController extends Controller implements IController
         $result = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        dd($result);
+        //dd($result);
         $json = json_decode($result, true);
         $accesstoken = $json['access_token'];
 
