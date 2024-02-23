@@ -270,7 +270,9 @@ class BrivaController extends Controller implements IController
 
     /*Generate signature*/
     public function BRIVAgenerateSignature($path,$verb,$token,$timestamp,$payload,$secret){
+
         $payloads = "path=$path&verb=$verb&token=Bearer $token&timestamp=$timestamp&body=$payload";
+        dd($payloads);
         $signPayload = hash_hmac('sha256', $payloads, $secret, true);
         return base64_encode($signPayload);
     }
@@ -429,7 +431,7 @@ class BrivaController extends Controller implements IController
         $verb = "POST";
         //generate signature
         $base64sign = $this->BRIVAgenerateSignature($path,$verb,$token,$timestamp,$payload,$secret);
-        dd($base64sign);
+
         $request_headers = array(
                             "Content-Type:"."application/json",
                             "Authorization:Bearer " . $token,
