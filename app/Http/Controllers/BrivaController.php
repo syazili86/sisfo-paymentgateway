@@ -429,7 +429,7 @@ class BrivaController extends Controller implements IController
         $verb = "POST";
         //generate signature
         $base64sign = $this->BRIVAgenerateSignature($path,$verb,$token,$timestamp,$payload,$secret);
-
+        dd($base64sign);
         $request_headers = array(
                             "Content-Type:"."application/json",
                             "Authorization:Bearer " . $token,
