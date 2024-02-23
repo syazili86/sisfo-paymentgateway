@@ -253,6 +253,7 @@ class BrivaController extends Controller implements IController
         $data = "client_id=".$client_id."&client_secret=".$secret_id;
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded'));
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -380,6 +381,7 @@ class BrivaController extends Controller implements IController
     public function create(){
         /**  checkType - Updated at 2021-07-08 */
         $checkType = ToUniversityOrInstitution::where('tuitionMasterId',$this->tid)->first();
+        dd($checkType);
         if($checkType['isUniversity'] == null){
             return ['status'=>false,'msg'=>'Data pembayaran belum diatur'];
         }else{
