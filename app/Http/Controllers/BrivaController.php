@@ -32,8 +32,8 @@ class BrivaController extends Controller implements IController
     /** Universitas - Updated at 2021-07-08 */
     private $consumerSecretInstitution='MnBbTYef3MY52obH';
     private $consumerKeyInstitution='FbBNnaIt7375M9C0LaA4h3m5FJZrGBVZ';
-    private $institutionCodeInstitution='';
-    private $brivaNoInstitution='';
+    private $institutionCodeInstitution='NWUK40575WJ';
+    private $brivaNoInstitution='12837';
     /** Universitas - Updated at 2021-07-08 */
 
     private $errorStatus=500;
