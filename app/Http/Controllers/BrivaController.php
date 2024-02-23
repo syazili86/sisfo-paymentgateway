@@ -398,7 +398,7 @@ class BrivaController extends Controller implements IController
             }
         }
         /**  checkType - Updated at 2021-07-08 */
-        dd($this->consumerKey);
+
         $client_id = $this->consumerKey;
         $secret_id = $this->consumerSecret;
         $timestamp = gmdate("Y-m-d\TH:i:s.000\Z");
