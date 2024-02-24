@@ -16,17 +16,17 @@ class BrivaController extends Controller implements IController
     private  $host="https://partner.api.bri.co.id";
 
     /** Old */
-    private $consumerSecret='REt9iY9AexyC4zgE';
-    private $consumerKey='vOSweko7MjGILufUbVMNk3cZAERZNwLA';
+    private $consumerSecret='MnBbTYef3MY52obH';
+    private $consumerKey='FbBNnaIt7375M9C0LaA4h3m5FJZrGBVZ';
     private $institutionCode='NWUK40575WJ';
-    private $brivaNo=128377;
+    private $brivaNo='12837';
     /** Old */
 
     /** Institution - Updated at 2021-07-08 */
-    private $consumerSecretUniversity='';
-    private $consumerKeyUniversity='';
-    private $institutionCodeUniversity='';
-    private $brivaNoUniversity='';
+    private $consumerSecretUniversity='MnBbTYef3MY52obH';
+    private $consumerKeyUniversity='FbBNnaIt7375M9C0LaA4h3m5FJZrGBVZ';
+    private $institutionCodeUniversity='NWUK40575WJ';
+    private $brivaNoUniversity='12837';
     /** Institution - Updated at 2021-07-08 */
 
     /** Universitas - Updated at 2021-07-08 */
