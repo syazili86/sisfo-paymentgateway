@@ -416,7 +416,7 @@ class BrivaController extends Controller implements IController
         $expiredDate=$this->expiredDate;
 
         $this->delete();
-        exit('hi');
+
         $datas = array('institutionCode' => $institutionCode ,
             'brivaNo' => $brivaNo,
             'custCode' => $custCode,
@@ -428,6 +428,7 @@ class BrivaController extends Controller implements IController
         $payload = json_encode($datas, true);
         $path = "/v1/briva";
         $verb = "POST";
+
         //generate signature
         $base64sign = $this->BRIVAgenerateSignature($path,$verb,$token,$timestamp,$payload,$secret);
 
