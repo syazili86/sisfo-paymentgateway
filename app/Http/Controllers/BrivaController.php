@@ -415,8 +415,8 @@ class BrivaController extends Controller implements IController
         $keterangan=$this->keterangan;
         $expiredDate=$this->expiredDate;
 
-        $this->delete();exit();
-
+        $del=$this->delete();
+        dd($del);
         $datas = array('institutionCode' => $institutionCode ,
             'brivaNo' => $brivaNo,
             'custCode' => $custCode,
