@@ -251,7 +251,7 @@ class BrivaController extends Controller implements IController
     public function BRIVAgenerateToken($client_id, $secret_id){
         $url =$this->host."/oauth/client_credential/accesstoken?grant_type=client_credentials";
         $data = "client_id=".$client_id."&client_secret=".$secret_id;
-        echo "generate token ".$data;
+       // echo "generate token ".$data;
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
         curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded'));
@@ -274,6 +274,7 @@ class BrivaController extends Controller implements IController
 
         $payloads = "path=$path&verb=$verb&token=Bearer $token&timestamp=$timestamp&body=$payload";
         $signPayload = hash_hmac('sha256', $payloads, $secret, true);
+        echo base64_encode($signPayload);
         return base64_encode($signPayload);
     }
 
@@ -540,7 +541,6 @@ class BrivaController extends Controller implements IController
         $secret = $secret_id;
         //generate token
         $token = $this->BRIVAgenerateToken($client_id,$secret_id);
-        echo "token ".$token." consumerkey:".$client_id." consumerSecret:".$secret_id;
 
         $institutionCode = $this->institutionCode;
         $brivaNo = $this->brivaNo;
@@ -555,9 +555,9 @@ class BrivaController extends Controller implements IController
         $payload = "institutionCode=".$institutionCode."&brivaNo=".$brivaNo."&custCode=".$custCode;
         $path = "/v1/briva";
         $verb = "DELETE";
-        echo "path :".$path.",verb :".$verb.", token :".$token.",ts :".$timestamp.",payload : ".$payload.",secret: ".$secret;
 
         $base64sign = $this->BRIVAgenerateSignature($path, $verb, $token, $timestamp, $payload, $secret);
+        echo "signsture 2: ".$base64sign;
 
         $request_headers = array(
             "Authorization:Bearer " . $token,
