@@ -251,6 +251,7 @@ class BrivaController extends Controller implements IController
     public function BRIVAgenerateToken($client_id, $secret_id){
         $url =$this->host."/oauth/client_credential/accesstoken?grant_type=client_credentials";
         $data = "client_id=".$client_id."&client_secret=".$secret_id;
+        echo "generate token ".$data;
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
         curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded'));
