@@ -574,7 +574,7 @@ class BrivaController extends Controller implements IController
         curl_setopt($chPost, CURLOPT_RETURNTRANSFER, true);
 
         $resultPost = curl_exec($chPost);
-        echo json_decode($resultPost, true);exit();
+        echo $resultPost;exit();
         $httpCodePost = curl_getinfo($chPost, CURLINFO_HTTP_CODE);
         curl_close($chPost);
         return json_decode($resultPost, true);
