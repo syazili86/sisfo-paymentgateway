@@ -415,7 +415,7 @@ class BrivaController extends Controller implements IController
         $keterangan=$this->keterangan;
         $expiredDate=$this->expiredDate;
 
-        $this->delete();
+        $this->delete();exit();
 
         $datas = array('institutionCode' => $institutionCode ,
             'brivaNo' => $brivaNo,
@@ -574,7 +574,6 @@ class BrivaController extends Controller implements IController
         curl_setopt($chPost, CURLOPT_RETURNTRANSFER, true);
 
         $resultPost = curl_exec($chPost);
-        echo $resultPost;exit();
         $httpCodePost = curl_getinfo($chPost, CURLINFO_HTTP_CODE);
         curl_close($chPost);
         return json_decode($resultPost, true);
