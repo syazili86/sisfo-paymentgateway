@@ -539,7 +539,7 @@ class BrivaController extends Controller implements IController
         $secret = $secret_id;
         //generate token
         $token = $this->BRIVAgenerateToken($client_id,$secret_id);
-        echo "token ".$token;
+        echo "token ".$token." consumerkey:".$client_id." consumerSecret:".$secret_id;
 
         $institutionCode = $this->institutionCode;
         $brivaNo = $this->brivaNo;
