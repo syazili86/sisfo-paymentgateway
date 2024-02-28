@@ -554,7 +554,7 @@ class BrivaController extends Controller implements IController
         $payload = "institutionCode=".$institutionCode."&brivaNo=".$brivaNo."&custCode=".$custCode;
         $path = "/v1/briva";
         $verb = "DELETE";
-        echo "path :".$path.",verb :".$verb.", token :".$token.",ts :".$timestamp.",payload : ".$payload.",secret: ".$secret; exit();
+        echo "path :".$path.",verb :".$verb.", token :".$token.",ts :".$timestamp.",payload : ".$payload.",secret: ".$secret;
 
         $base64sign = $this->BRIVAgenerateSignature($path, $verb, $token, $timestamp, $payload, $secret);
 
@@ -574,7 +574,7 @@ class BrivaController extends Controller implements IController
         curl_setopt($chPost, CURLOPT_RETURNTRANSFER, true);
 
         $resultPost = curl_exec($chPost);
-
+        echo json_decode($resultPost, true);exit();
         $httpCodePost = curl_getinfo($chPost, CURLINFO_HTTP_CODE);
         curl_close($chPost);
         return json_decode($resultPost, true);
