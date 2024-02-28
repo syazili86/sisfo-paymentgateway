@@ -539,7 +539,8 @@ class BrivaController extends Controller implements IController
         $secret = $secret_id;
         //generate token
         $token = $this->BRIVAgenerateToken($client_id,$secret_id);
-        dd($token);
+        echo "token ".$token;
+
         $institutionCode = $this->institutionCode;
         $brivaNo = $this->brivaNo;
         $custCode = $this->custCode;
@@ -553,6 +554,8 @@ class BrivaController extends Controller implements IController
         $payload = "institutionCode=".$institutionCode."&brivaNo=".$brivaNo."&custCode=".$custCode;
         $path = "/v1/briva";
         $verb = "DELETE";
+        echo "path :".$path.",verb :".$verb.", token :".$token.",ts :".$timestamp.",payload : ".$payload.",secret: ".$secret; exit();
+
         $base64sign = $this->BRIVAgenerateSignature($path, $verb, $token, $timestamp, $payload, $secret);
 
         $request_headers = array(
