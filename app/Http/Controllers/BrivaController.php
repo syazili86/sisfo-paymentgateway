@@ -565,6 +565,7 @@ class BrivaController extends Controller implements IController
             "BRI-Timestamp:" . $timestamp,
             "BRI-Signature:" . $base64sign,
         );
+        echo "<br/>delete() ".$payload;
         dd($request_headers);
         $urlPost =$this->host."/v1/briva";
         $chPost = curl_init();
