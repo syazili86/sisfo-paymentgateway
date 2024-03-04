@@ -16,22 +16,31 @@ class BrivaController extends Controller implements IController
     private  $host="https://partner.api.bri.co.id";
 
     /** Old */
-    private $consumerSecret='MnBbTYef3MY52obH';
-    private $consumerKey='FbBNnaIt7375M9C0LaA4h3m5FJZrGBVZ';
+   // private $consumerSecret='MnBbTYef3MY52obH';
+   // private $consumerKey='FbBNnaIt7375M9C0LaA4h3m5FJZrGBVZ';
+    private $consumerSecret='1A4ZqDzRe2h7ok4j';
+    private $consumerKey='ggyM3OiddA46GiUB3R6WrR9BzbYDKBj0';
+
     private $institutionCode='NWUK40575WJ';
     private $brivaNo='12837';
     /** Old */
 
     /** Institution - Updated at 2021-07-08 */
-    private $consumerSecretUniversity='MnBbTYef3MY52obH';
-    private $consumerKeyUniversity='FbBNnaIt7375M9C0LaA4h3m5FJZrGBVZ';
+    //private $consumerSecretUniversity='MnBbTYef3MY52obH';
+    //private $consumerKeyUniversity='FbBNnaIt7375M9C0LaA4h3m5FJZrGBVZ';
+    private $consumerSecretUniversity='1A4ZqDzRe2h7ok4j';
+    private $consumerKeyUniversity='ggyM3OiddA46GiUB3R6WrR9BzbYDKBj0';
+
     private $institutionCodeUniversity='NWUK40575WJ';
     private $brivaNoUniversity='12837';
     /** Institution - Updated at 2021-07-08 */
 
     /** Universitas - Updated at 2021-07-08 */
-    private $consumerSecretInstitution='MnBbTYef3MY52obH';
-    private $consumerKeyInstitution='FbBNnaIt7375M9C0LaA4h3m5FJZrGBVZ';
+   // private $consumerSecretInstitution='MnBbTYef3MY52obH';
+   //private $consumerKeyInstitution='FbBNnaIt7375M9C0LaA4h3m5FJZrGBVZ';
+    private $consumerSecretInstitution='1A4ZqDzRe2h7ok4j';
+    private $consumerKeyInstitution='ggyM3OiddA46GiUB3R6WrR9BzbYDKBj0';
+
     private $institutionCodeInstitution='NWUK40575WJ';
     private $brivaNoInstitution='12837';
     /** Universitas - Updated at 2021-07-08 */
@@ -419,7 +428,7 @@ class BrivaController extends Controller implements IController
         $expiredDate=$this->expiredDate;
 
         $del=$this->delete();
-        dd($del);
+
         $datas = array('institutionCode' => $institutionCode ,
             'brivaNo' => $brivaNo,
             'custCode' => $custCode,
@@ -566,7 +575,7 @@ class BrivaController extends Controller implements IController
             "BRI-Signature:" . $base64sign,
         );
         echo "<br/>delete() ".$payload;
-        dd($request_headers);
+        echo "<pre>".print_r($request_headers)."</pre>";
         $urlPost =$this->host."/v1/briva";
         $chPost = curl_init();
         curl_setopt($chPost, CURLOPT_URL, $urlPost);
