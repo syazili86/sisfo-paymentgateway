@@ -273,6 +273,7 @@ class BrivaController extends Controller implements IController
     public function BRIVAgenerateSignature($path,$verb,$token,$timestamp,$payload,$secret){
         echo "signature token :".$token;
         $payloads = "path=$path&verb=$verb&token=Bearer $token&timestamp=$timestamp&body=$payload";
+        echo "payload : ".$payloads;
         $signPayload = hash_hmac('sha256', $payloads, $secret, true);
         echo base64_encode($signPayload);
         return base64_encode($signPayload);
