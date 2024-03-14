@@ -580,12 +580,13 @@ class BrivaController extends Controller implements IController
         curl_setopt($chPost, CURLINFO_HEADER_OUT, true);
         curl_setopt($chPost, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($chPost, CURLOPT_RETURNTRANSFER, true);
-        echo "url : ". $urlPost;
-        echo "<br/>method: DELETE";
-        echo "<br/>header: ".print_r($request_headers);
-        echo "<br/>body :".print_r($payload);
+        // echo "url : ". $urlPost;
+        // echo "<br/>method: DELETE";
+        // echo "<br/>header: ".print_r($request_headers);
+        // echo "<br/>body :".print_r($payload);
         $resultPost = curl_exec($chPost);
-        $httpCodePost = curl_getinfo($chPost, CURLINFO_HTTP_CODE);
+        $httpCodePost = curl_getinfo($chPost);
+        print_r($httpCodePost);
         curl_close($chPost);
         return json_decode($resultPost, true);
     }
