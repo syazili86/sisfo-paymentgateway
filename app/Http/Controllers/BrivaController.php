@@ -568,6 +568,7 @@ class BrivaController extends Controller implements IController
             "Authorization:Bearer " . $token,
             "BRI-Timestamp:" . $timestamp,
             "BRI-Signature:" . $base64sign,
+            "Content-Type: Text/plain"
         );
         // echo "<br/>delete() ".$payload;
         // echo "<pre>".print_r($request_headers)."</pre>";
