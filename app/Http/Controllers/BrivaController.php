@@ -562,15 +562,15 @@ class BrivaController extends Controller implements IController
         $verb = "DELETE";
 
         $base64sign = $this->BRIVAgenerateSignature($path, $verb, $token, $timestamp, $payload, $secret);
-        echo "signsture 2: ".$base64sign;
+        // echo "signsture 2: ".$base64sign;
 
         $request_headers = array(
             "Authorization:Bearer " . $token,
             "BRI-Timestamp:" . $timestamp,
             "BRI-Signature:" . $base64sign,
         );
-        echo "<br/>delete() ".$payload;
-        echo "<pre>".print_r($request_headers)."</pre>";
+        // echo "<br/>delete() ".$payload;
+        // echo "<pre>".print_r($request_headers)."</pre>";
         $urlPost =$this->host."/v1/briva";
         $chPost = curl_init();
         curl_setopt($chPost, CURLOPT_URL, $urlPost);
@@ -579,7 +579,10 @@ class BrivaController extends Controller implements IController
         curl_setopt($chPost, CURLINFO_HEADER_OUT, true);
         curl_setopt($chPost, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($chPost, CURLOPT_RETURNTRANSFER, true);
-
+        echo "url : ". $urlPost;
+        echo "<br/>method: DELETE";
+        echo "<br/>header: ".print_r($request_headers);
+        echo "<br/>body :".print_r($payload);
         $resultPost = curl_exec($chPost);
         $httpCodePost = curl_getinfo($chPost, CURLINFO_HTTP_CODE);
         curl_close($chPost);
