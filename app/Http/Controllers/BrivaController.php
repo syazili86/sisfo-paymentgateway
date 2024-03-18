@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Models\BillingExpired;
 use App\Models\ToUniversityOrInstitution;
 use Illuminate\Support\Facades\Validator;
-
+use Log;
 class BrivaController extends Controller implements IController
 {
     private  $host="https://partner.api.bri.co.id";
@@ -811,5 +811,6 @@ class BrivaController extends Controller implements IController
                     ->delete();
             }
         }
+        Log::info("Cron briva berhasil");
     }
 }
