@@ -755,6 +755,7 @@ class BrivaController extends Controller implements IController
         if (isset($report['responseCode']) and $report['responseCode'] = '00' and $report['status']) {
             //ada pembayaran
             foreach ($report['data'] as $k => $v) {
+                Log::debug("cron : ".json_encode($v));
                 $bill = BillingHeader::where('PayCode',$v['custCode']);
                 if ($bill->count() > 0) {
                     $bill = $bill->first();
