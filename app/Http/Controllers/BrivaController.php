@@ -811,6 +811,6 @@ class BrivaController extends Controller implements IController
                     ->delete();
             }
         }
-        Log::info("Cron briva berhasil");
+        Log::info("Cron briva berhasil kode bayar: ".$this->custCode);
     }
 }
