@@ -736,9 +736,11 @@ class BrivaController extends Controller implements IController
 
         if ($lastEnd + $durasiTarikData < time()) {
             $this->startDate = date('Y-m-d', $lastEnd);
-            $this->endDate = date('Y-m-d', $lastEnd + $durasiTarikData);
-            $this->startTime = date('H:i', $lastEnd);
-            $this->endTime = date('H:i', $lastEnd + $durasiTarikData);
+           // $this->endDate = date('Y-m-d', $lastEnd + $durasiTarikData);
+           $this->endDate = date('Y-m-d');
+           $this->startTime = date('H:i', $lastEnd);
+           // $this->endTime = date('H:i', $lastEnd + $durasiTarikData);
+           $this->endTime = date('H:i');
         } else {
             $this->startDate = date('Y-m-d', strtotime(date('Y-m-d H:i:s')) - $durasiTarikData);
             $this->endDate = date('Y-m-d');
