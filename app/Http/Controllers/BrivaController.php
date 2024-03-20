@@ -810,7 +810,7 @@ class BrivaController extends Controller implements IController
                     ->where('BillingId',$exp->BillingID)
                     ->delete();
             }
+            Log::info("Cron briva berhasil kode bayar: ".$this->custCode);
         }
-        Log::info("Cron briva berhasil kode bayar: ".$this->custCode);
     }
 }
