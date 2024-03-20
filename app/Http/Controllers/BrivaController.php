@@ -732,6 +732,7 @@ class BrivaController extends Controller implements IController
         //cari pembayaran briva
         $durasiTarikData = 1; //data ditarik 1 jam 60 X 60 diubah jadi per detik
         $dbEnd = (BillingCron::where('PaymentMethodId',$this->paymentMethodId)->max('endTime'));
+        dd($dbEnd);
         $lastEnd = !empty($dbEnd) ? strtotime($dbEnd) : strtotime('2021-01-27 22:00:00');
         if ($lastEnd + $durasiTarikData < time()) {
             $this->startDate = date('Y-m-d', $lastEnd);
