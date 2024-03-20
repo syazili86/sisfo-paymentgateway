@@ -715,6 +715,12 @@ class BrivaController extends Controller implements IController
 
         $resultPost = curl_exec($chPost);
         $httpCodePost = curl_getinfo($chPost, CURLINFO_HTTP_CODE);
+        $info =  curl_getinfo($chPost);
+        $request_header_info = curl_getinfo($chPost, CURLINFO_HEADER_OUT);
+
+        Log::debug("curl info : ".json_encode($info));
+        Log::debug("curl request header info : ".json_encode($request_header_info));
+
         curl_close($chPost);
 
         return json_decode($resultPost, true);
