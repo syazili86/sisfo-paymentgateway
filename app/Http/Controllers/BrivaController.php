@@ -720,7 +720,7 @@ class BrivaController extends Controller implements IController
 
         Log::debug("getReportTime : curl info : ".json_encode($info));
         Log::debug("getReportTime : curl request header info : ".json_encode($request_header_info));
-        Log::debug("getReportTime : curl result : ".json_encode($resultPos));
+        Log::debug("getReportTime : curl result : ".json_encode($resultPost));
 
         curl_close($chPost);
 
