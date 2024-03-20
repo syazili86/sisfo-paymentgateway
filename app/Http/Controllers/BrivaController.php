@@ -723,7 +723,7 @@ class BrivaController extends Controller implements IController
 
     function cron() {
         //cari pembayaran briva
-        $durasiTarikData = 60*60; //data ditarik 1 jam
+        $durasiTarikData = 1; //data ditarik 1 jam 60 X 60 diubah jadi per detik
         $dbEnd = (BillingCron::where('PaymentMethodId',$this->paymentMethodId)->max('endTime'));
         $lastEnd = !empty($dbEnd) ? strtotime($dbEnd) : strtotime('2021-01-27 22:00:00');
         if ($lastEnd + $durasiTarikData < time()) {
@@ -812,5 +812,6 @@ class BrivaController extends Controller implements IController
             }
             Log::info("Cron briva berhasil kode bayar: ".$this->custCode);
         }
+        Log::info("Cron briva berakhir");
     }
 }
