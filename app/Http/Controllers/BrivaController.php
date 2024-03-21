@@ -755,7 +755,7 @@ class BrivaController extends Controller implements IController
         if (isset($report['responseCode']) and $report['responseCode'] = '00' and $report['status']) {
             //ada pembayaran
             foreach ($report['data'] as $k => $v) {
-                Log::debug("cron : ".json_encode($v));
+                Log::debug("briva-cron : ".json_encode($v));
                 $bill = BillingHeader::where('PayCode',$v['custCode']);
                 if ($bill->count() > 0) {
                     $bill = $bill->first();
@@ -774,6 +774,18 @@ class BrivaController extends Controller implements IController
                         ]
                         );
                     }
+
+                    Log::debug("briva-cron : sukses update billing HEADER: ".json_encode(                        [
+                        'PaymentStatusID' => 3,
+                        'tanggalTransaksi' => $v['paymentDate'],
+                        'tanggalTransaksiServer' => $v['paymentDate'],
+                        'kodeChanel' => $v['channel'],
+                        'kodeTerminal' => $v['tellerid'],
+                        'KodeTransaksiBANK' => $v['no_rek'],
+                        'nomorJurnalPembukuan' => $v['trxID'],
+                        'PaymentMethodID' => $this->paymentMethodId
+                    ]));
+
                 }
             }
         }
@@ -801,27 +813,28 @@ class BrivaController extends Controller implements IController
             $get = $this->get();
             if ($get['responseCode'] == '00' and $get['status']) {
                 if($get['data']['statusBayar'] == "Y") {
-                    BillingHeader::where('PayCode',$this->custCode)
-                        ->update(
-                        [
-                            'PaymentStatusID' => 3,
-                            'tanggalTransaksi' => date('Y-m-d H:i:s'),
-                            'tanggalTransaksiServer' => date('Y-m-d H:i:s'),
-                            'PaymentMethodID' => $this->paymentMethodId
-                        ]
-                        );
+                    // BillingHeader::where('PayCode',$this->custCode)
+                    //     ->update(
+                    //     [
+                    //         'PaymentStatusID' => 3,
+                    //         'tanggalTransaksi' => date('Y-m-d H:i:s'),
+                    //         'tanggalTransaksiServer' => date('Y-m-d H:i:s'),
+                    //         'PaymentMethodID' => $this->paymentMethodId
+                    //     ]
+                    // );
+
                 } else {
                     $this->delete();
                     BillingExpired::where('PaymentMethodId',$this->paymentMethodId)
                                 ->where('BillingId',$exp->BillingID)
                                 ->delete();
+                    Log::info("Briva-cron Berhasil menghapus billing expired: billing id".$exp->BillingID." ".json_encode($get['data']));
                 }
             } else {
                 BillingExpired::where('PaymentMethodId',$this->paymentMethodId)
                     ->where('BillingId',$exp->BillingID)
                     ->delete();
             }
-            Log::info("Cron briva berhasil kode bayar: ".$this->custCode);
         }
         Log::info("Cron briva berakhir");
     }
