@@ -93,7 +93,7 @@ class Briva extends Command
         );
 
         $request= Http::withToken($token)->withHeaders($request_headers)->get($this->host.$path);
-        dd($request);
+        dd($request->body());
         return json_decode($request, true);
     }
 
