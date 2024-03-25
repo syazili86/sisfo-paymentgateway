@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Models\BillingExpired;
 use App\Models\ToUniversityOrInstitution;
 use Illuminate\Support\Facades\Validator;
-use Log;
+use Illuminate\Support\Facades\Log;
 class BrivaController extends Controller implements IController
 {
     private  $host="https://partner.api.bri.co.id";
@@ -264,9 +264,11 @@ class BrivaController extends Controller implements IController
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
         $result = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        //$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $info = curl_getinfo($ch);
         curl_close($ch);
-        //dd($result);
+        Log::debug("Brivacontroller  - ".$info);
+
         $json = json_decode($result, true);
         $accesstoken = $json['access_token'];
 
