@@ -766,7 +766,7 @@ class BrivaController extends Controller implements IController
         if (isset($report['responseCode']) and $report['responseCode'] = '00' and $report['status']) {
             //ada pembayaran
             foreach ($report['data'] as $k => $v) {
-                Log::channel('daily_cron_log')->debug("briva-cron : ".json_encode($v));
+                Log::debug("briva-cron : ".json_encode($v));
                 $bill = BillingHeader::where('PayCode',$v['custCode']);
                 if ($bill->count() > 0) {
                     $bill = $bill->first();
@@ -786,7 +786,7 @@ class BrivaController extends Controller implements IController
                         );
                     }
 
-                    Log::channel('daily_cron_log')->debug("briva-cron : sukses update billing HEADER: ".json_encode(                        [
+                    Log::debug("briva-cron : sukses update billing HEADER: ".json_encode(                        [
                         'PaymentStatusID' => 3,
                         'tanggalTransaksi' => $v['paymentDate'],
                         'tanggalTransaksiServer' => $v['paymentDate'],
@@ -839,7 +839,7 @@ class BrivaController extends Controller implements IController
                     BillingExpired::where('PaymentMethodId',$this->paymentMethodId)
                                 ->where('BillingId',$exp->BillingID)
                                 ->delete();
-                    Log::channel('daily_cron_log')->info("Briva-cron Berhasil menghapus billing expired: billing id".$exp->BillingID." ".json_encode($get['data']));
+                    Log::info("Briva-cron Berhasil menghapus billing expired: billing id".$exp->BillingID." ".json_encode($get['data']));
                 }
             } else {
                 BillingExpired::where('PaymentMethodId',$this->paymentMethodId)
@@ -847,6 +847,6 @@ class BrivaController extends Controller implements IController
                     ->delete();
             }
         }
-        Log::channel('daily_cron_log')->info("Cron briva berakhir");
+        Log::info("Cron briva berakhir");
     }
 }
