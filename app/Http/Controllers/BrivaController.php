@@ -263,6 +263,8 @@ class BrivaController extends Controller implements IController
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
+
         $result = curl_exec($ch);
         //$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $info = curl_getinfo($ch);
