@@ -65,7 +65,7 @@ class Briva extends Command
         $data = ['client_id'=>$client_id,'client_secret'=>$secret_id];
 
         // echo "generate token ".$data;
-        $request=Http::withOptions(['verify' => false])->asForm()->post($url,$data);
+        $request=Http::asForm()->post($url,$data);
 
         $json = json_decode($request, true);
         $accesstoken = $json['access_token'];
