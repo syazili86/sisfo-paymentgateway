@@ -266,8 +266,9 @@ class BrivaController extends Controller implements IController
         $result = curl_exec($ch);
         //$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $info = curl_getinfo($ch);
+        Log::debug("Brivacontroller  - ".json_encode($info));
+
         curl_close($ch);
-        Log::debug("Brivacontroller  - ".$info);
 
         $json = json_decode($result, true);
         $accesstoken = $json['access_token'];
