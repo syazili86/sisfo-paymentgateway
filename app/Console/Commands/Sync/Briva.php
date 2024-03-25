@@ -91,6 +91,7 @@ class Briva extends Command
             "BRI-Timestamp:" . $timestamp,
             "BRI-Signature:" . $base64sign,
         );
+        dd($request_headers);
 
         $request= Http::withToken($token)->withHeaders($request_headers)->get($this->host.$path);
         dd($request->body());
