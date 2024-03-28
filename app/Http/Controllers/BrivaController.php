@@ -847,6 +847,7 @@ class BrivaController extends Controller implements IController
                     ->delete();
             }
         }
+        echo "cron berakhir";
         Log::info("Cron briva berakhir");
     }
 }
