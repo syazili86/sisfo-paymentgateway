@@ -849,5 +849,7 @@ class BrivaController extends Controller implements IController
         }
         echo "cron berakhir";
         Log::info("Cron briva berakhir");
+        sleep($durasiTarikData);
+        $this->cron();
     }
 }
