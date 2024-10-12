@@ -729,9 +729,9 @@ class BrivaController extends Controller implements IController
 
         if (isset($report['responseCode']) and in_array($report['responseCode'],['41'])) {
 
-            Log::debug("Brivacon - getReportTime : curl info : ".json_encode($info));
+            Log::info("Brivacon - getReportTime : curl info : ".json_encode($info));
             Log::debug("Brivacon - getReportTime : curl request header info : ".json_encode($request_header_info));
-            Log::debug("Brivacon - getReportTime : curl result : ".json_encode($resultPost));
+            Log::info("Brivacon - getReportTime : curl result : ".json_encode($resultPost));
         }
         curl_close($chPost);
 
