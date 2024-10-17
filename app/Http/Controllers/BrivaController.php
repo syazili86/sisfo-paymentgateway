@@ -244,8 +244,9 @@ class BrivaController extends Controller implements IController
             );
        }else{
          $metadata=$this;
+         //dd($metadata);
          return response()->json(
-            array_merge(['status'=>'success','metadata'=>$respon],compact($metadata)),
+            array_merge(['status'=>'success','metadata'=>$respon]),
             $this->successStatus
          );
        }
@@ -743,30 +744,45 @@ class BrivaController extends Controller implements IController
         //cari pembayaran briva
         $durasiTarikData = 10; //data ditarik 1 jam 60 X 60 diubah jadi per detik
         $dbEnd = (BillingCron::where('PaymentMethodId',$this->paymentMethodId)->max('endTime'));
+        Log::debug(' dbend '. $dbEnd);
+
         $lastEnd = !empty($dbEnd) ? strtotime($dbEnd) : strtotime('2021-01-27 22:00:00');
+        
+        Log::debug("briva-cron-last-end : ".$lastEnd);
 
         if ($lastEnd + $durasiTarikData < time()) {
+            Log::debug($lastEnd + $durasiTarikData.' < '.time());
+
             $this->startDate = date('Y-m-d', $lastEnd);
+            Log::debug("757 : ".$this->startDate);
+
            // $this->endDate = date('Y-m-d', $lastEnd + $durasiTarikData);
            $this->endDate = date('Y-m-d');
            $this->startTime = date('H:i', $lastEnd);
            // $this->endTime = date('H:i', $lastEnd + $durasiTarikData);
            $this->endTime = date('H:i');
         } else {
+           Log::debug($lastEnd + $durasiTarikData.' ! '.time());
+
             $this->startDate = date('Y-m-d', strtotime(date('Y-m-d H:i:s')) - $durasiTarikData);
             $this->endDate = date('Y-m-d');
             $this->startTime = date('H:i', strtotime(date('Y-m-d H:i:s')) - $durasiTarikData);
             $this->endTime = date('H:i');
         }
         if ($this->startDate <> $this->endDate) {
-            $this->startDate = $this->endDate;
-            $this->startTime = '00:00';
+          //  $this->startDate = $this->endDate;
+          $this->endDate = $this->startDate;
+          //$this->startTime = '00:00';
         }
+        Log::debug("briva-cron-start-date : ".$this->startDate."-".$this->startTime);
+        Log::debug("briva-cron-end-date : ".$this->endDate."-".$this->endTime);
+
         $report = ($this->getReportTime());
+        Log::debug("briva-cron-report-data : ".json_encode($report));
         if (isset($report['responseCode']) and $report['responseCode'] = '00' and $report['status']) {
             //ada pembayaran
             foreach ($report['data'] as $k => $v) {
-                Log::debug("briva-cron : ".json_encode($v));
+                Log::debug("briva-cron-data : ".json_encode($v));
                 $bill = BillingHeader::where('PayCode',$v['custCode']);
                 if ($bill->count() > 0) {
                     $bill = $bill->first();
