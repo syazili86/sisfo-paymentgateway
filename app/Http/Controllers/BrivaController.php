@@ -396,6 +396,7 @@ class BrivaController extends Controller implements IController
     }
 
     public function create(){
+        return response()->json('', 204);
         /**  checkType - Updated at 2021-07-08 */
         $checkType = ToUniversityOrInstitution::where('tuitionMasterId',$this->tid)->first();
 
